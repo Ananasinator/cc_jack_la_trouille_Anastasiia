@@ -12,6 +12,13 @@ class Orb {
     speed = int(random(2, 5));
     
   }
+  int is_alive(){
+    if (position_x < orb_size) {
+     return 1; 
+     } else { 
+       return 0;
+     }
+  }
   void display() {
       pushStyle();
       fill(orb_color); 
@@ -48,7 +55,13 @@ void draw() {
   image(background, 0, 0);
   spawn();
   for (int i = 0; i < my_orbs.size(); i++) {
-    my_orbs.get(i).move();
-    my_orbs.get(i).display();
-  }
+     if (my_orbs.get(i).is_alive() == 0){
+       my_orbs.get(i).move();
+       my_orbs.get(i).display();
+   } else {
+     my_orbs.remove(i);
+     i--; 
+   }
+ }
+
 }
