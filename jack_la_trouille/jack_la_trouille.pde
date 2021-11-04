@@ -2,6 +2,7 @@
 
 class Orb {
   int orb_size, position_x, position_y, orb_color, speed;
+  boolean clicked;
   Orb() {
     position_x = 1250;
     orb_size = int(random(25,50));
@@ -14,9 +15,13 @@ class Orb {
   }
   int is_alive(){
     if (position_x < orb_size) {
-     return 1; 
+       return 1; 
      } else { 
+       if (clicked){
+         return 2;
+       } else {
        return 0;
+       }
      }
   }
   void display() {
@@ -27,7 +32,15 @@ class Orb {
       popStyle();
     }
   void move(){
-    position_x -= 10;
+    position_x -= 5;
+  }
+  
+  void click(){
+    if (mouseX > position_x - orb_size && mouseX < position_x + orb_size && mouseY > position_y - orb_size && mouseY < position_y + orb_size){
+       clicked = true;
+    } else {
+       clicked = false;
+    }
   }
 }
 
@@ -47,7 +60,7 @@ void spawn(){
   if (time_counter <= millis()){
    my_orbs.add(new Orb());
    time_counter = millis() + 100;
-}
+  }
 }
 
 void draw() {
@@ -61,7 +74,14 @@ void draw() {
    } else {
      my_orbs.remove(i);
      i--; 
+    }
+  }
+}
+
+void mousePressed() {
+ if (mouseButton == LEFT) {
+   for (int i = 0; i < my_orbs.size(); i += 1) {
+     my_orbs.get(i).click();
    }
  }
-
-}
+ }
