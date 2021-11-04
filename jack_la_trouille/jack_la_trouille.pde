@@ -8,6 +8,9 @@ PImage score_background;
 PFont score_font;
 PImage house;
 PImage zombie;
+PImage candy;
+Boolean[] candy_is_here;
+
 
 class Orb {
   int orb_size, position_x, position_y, orb_color, speed;
@@ -65,6 +68,10 @@ void setup() {
   textFont(score_font);
   house = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/house.png");
   zombie = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/zombitrouille.png");
+  candy = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/candies.png");
+  for(int y = 0; y < 5; y++){
+     candy_is_here[y] = true;
+  }
 }
 
 void spawn(){
@@ -80,6 +87,7 @@ void draw() {
   int[] lines = {180, 300, 420, 540, 660};
   for (int i = 0; i < lines.length; i++) {
     image(house, 10, lines[i] - 50);
+    image(candy, 130, lines[i] - 50);
   }
   spawn();
   for (int i = 0; i < my_orbs.size(); i++) {
