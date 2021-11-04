@@ -7,18 +7,19 @@ int kills = 0;
 PImage score_background;
 PFont score_font;
 PImage house;
+PImage zombie;
 
 class Orb {
   int orb_size, position_x, position_y, orb_color, speed;
   boolean clicked;
   Orb() {
     position_x = 1250;
-    orb_size = int(random(25,50));
+    orb_size = int(random(80,150));
     int[] lines = {180, 300, 420, 540, 660};
     int line_number = int(random(0, 5));
     position_y = lines[line_number];
     orb_color = color(#fc8803);
-    speed = int(random(2, 5));
+    speed = int(random(15,54));
     
   }
   int is_alive(){
@@ -34,13 +35,13 @@ class Orb {
   }
   void display() {
       pushStyle();
-      fill(orb_color); 
       noStroke(); 
-      circle(position_x, position_y, 50); 
+      imageMode(CENTER);
+      image(zombie, position_x, position_y, orb_size, orb_size);
       popStyle();
     }
   void move(){
-    position_x -= 5;
+    position_x -= 3;
   }
   
   void click(){
@@ -63,12 +64,13 @@ void setup() {
   score_font = createFont("C:/Users/anast/Документы/Jack La Trouille/ressources/Police/halloween_font.ttf", 50);
   textFont(score_font);
   house = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/house.png");
+  zombie = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/zombitrouille.png");
 }
 
 void spawn(){
   if (time_counter <= millis()){
    my_orbs.add(new Orb());
-   time_counter = millis() + 100;
+   time_counter = millis() + 500;
   }
 }
 
