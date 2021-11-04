@@ -26,16 +26,21 @@ class Orb {
 
 PImage background;
 ArrayList<Orb> my_orbs;
+long time_counter;
+
 
 void setup() {
   size(1200, 720);
   background = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/training_background.png");
   my_orbs = new ArrayList();
-  
+  time_counter = millis();
 }
 
 void spawn(){
- my_orbs.add(new Orb());
+  if (time_counter <= millis()){
+   my_orbs.add(new Orb());
+   time_counter = millis() + 100;
+}
 }
 
 void draw() {
