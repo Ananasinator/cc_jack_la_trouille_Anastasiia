@@ -6,6 +6,7 @@ long time_counter;
 int kills = 0;
 PImage score_background;
 PFont score_font;
+PImage house;
 
 class Orb {
   int orb_size, position_x, position_y, orb_color, speed;
@@ -55,12 +56,13 @@ class Orb {
 
 void setup() {
   size(1200, 720);
-  background = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/training_background.png");
+  background = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/battle_background.png");
   my_orbs = new ArrayList();
   time_counter = millis();
   score_background = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/score_rect.png");
   score_font = createFont("C:/Users/anast/Документы/Jack La Trouille/ressources/Police/halloween_font.ttf", 50);
   textFont(score_font);
+  house = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/house.png");
 }
 
 void spawn(){
@@ -73,6 +75,10 @@ void spawn(){
 void draw() {
   clear();
   image(background, 0, 0);
+  int[] lines = {180, 300, 420, 540, 660};
+  for (int i = 0; i < lines.length; i++) {
+    image(house, 10, lines[i] - 50);
+  }
   spawn();
   for (int i = 0; i < my_orbs.size(); i++) {
      if (my_orbs.get(i).is_alive() == 0){
@@ -87,7 +93,7 @@ void draw() {
   image(score_background, 0, 0);
   fill(color(#fc8803));
   textAlign(CENTER);
-  text(str(kills), 90, 90);
+  text(str(kills), 120, 90);
 }
 
 void mousePressed() {
