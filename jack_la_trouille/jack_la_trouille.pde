@@ -1,5 +1,11 @@
 // starting here
 
+PImage background;
+ArrayList<Orb> my_orbs;
+long time_counter;
+int kills = 0;
+String kill_display = "Kills:";
+
 class Orb {
   int orb_size, position_x, position_y, orb_color, speed;
   boolean clicked;
@@ -37,17 +43,14 @@ class Orb {
   
   void click(){
     if (mouseX > position_x - orb_size && mouseX < position_x + orb_size && mouseY > position_y - orb_size && mouseY < position_y + orb_size){
-       clicked = true;
+      clicked = true;
+      kills += 1;
     } else {
        clicked = false;
     }
   }
+ 
 }
-
-PImage background;
-ArrayList<Orb> my_orbs;
-long time_counter;
-
 
 void setup() {
   size(1200, 720);
@@ -76,6 +79,8 @@ void draw() {
      i--; 
     }
   }
+  textSize(50); 
+  text(kill_display + str(kills), 10, 50);
 }
 
 void mousePressed() {
