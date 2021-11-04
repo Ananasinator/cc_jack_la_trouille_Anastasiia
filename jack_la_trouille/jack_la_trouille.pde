@@ -4,7 +4,8 @@ PImage background;
 ArrayList<Orb> my_orbs;
 long time_counter;
 int kills = 0;
-String kill_display = "Kills:";
+PImage score_background;
+PFont score_font;
 
 class Orb {
   int orb_size, position_x, position_y, orb_color, speed;
@@ -46,7 +47,7 @@ class Orb {
       clicked = true;
       kills += 1;
     } else {
-       clicked = false;
+      clicked = false;
     }
   }
  
@@ -57,6 +58,9 @@ void setup() {
   background = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/training_background.png");
   my_orbs = new ArrayList();
   time_counter = millis();
+  score_background = loadImage("C:/Users/anast/Документы/Jack La Trouille/ressources/Images/score_rect.png");
+  score_font = createFont("C:/Users/anast/Документы/Jack La Trouille/ressources/Police/halloween_font.ttf", 50);
+  textFont(score_font);
 }
 
 void spawn(){
@@ -79,8 +83,11 @@ void draw() {
      i--; 
     }
   }
-  textSize(50); 
-  text(kill_display + str(kills), 10, 50);
+  
+  image(score_background, 0, 0);
+  fill(color(#fc8803));
+  textAlign(CENTER);
+  text(str(kills), 90, 90);
 }
 
 void mousePressed() {
